@@ -33,9 +33,10 @@ fun WellnessNewsCard(
 ) {
     Column(
         modifier = modifier
+            .width(NutrifyTheme.sizing.x5l)
             .background(MaterialTheme.colorScheme.surface)
-            .padding(NutrifyTheme.sizing.x9),
-        verticalArrangement = Arrangement.SpaceBetween
+            .padding(NutrifyTheme.sizing.small),
+        verticalArrangement = Arrangement.spacedBy(NutrifyTheme.sizing.x2),
     ) {
         Image(
             modifier = Modifier
@@ -48,6 +49,7 @@ fun WellnessNewsCard(
 
         LazyRow(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = NutrifyTheme.sizing.small),
             horizontalArrangement = Arrangement.spacedBy(NutrifyTheme.sizing.xSmall)
         ) {
@@ -69,7 +71,7 @@ fun WellnessNewsCard(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = NutrifyTheme.sizing.medium),
+                .padding(vertical = NutrifyTheme.sizing.xSmall),
             text = news.description,
             maxLines = 3,
             minLines = 3,
@@ -80,7 +82,7 @@ fun WellnessNewsCard(
         Text(
             text = stringResource(
                 R.string.reading_time,
-                 news.readingTime.milliseconds.inWholeMilliseconds
+                news.readingTime.milliseconds.inWholeMilliseconds
             ),
             style = MaterialTheme.typography.titleSmall.copy(color = MaterialTheme.colorScheme.tertiaryFixed),
         )
@@ -95,7 +97,6 @@ private fun WellnessNewsCardPreview() {
         WellnessNewsCard(
             modifier = Modifier.width(NutrifyTheme.sizing.x5l),
             news = News(
-                id = 1,
                 description = "Lorem ipsum dolor sit amet consectetur adipiscing elit.",
                 tags = listOf(NewsTags.WELL_BEING, NewsTags.NUTRITION),
                 imageResource = R.drawable.img_nutritional_news_3,
@@ -116,7 +117,6 @@ private fun WellnessNewsCardListPreview() {
                 WellnessNewsCard(
                     modifier = Modifier.width(NutrifyTheme.sizing.x5l),
                     news = News(
-                        id = 1,
                         description = "Lorem ipsum dolor sit amet consectetur adipiscing elit ipsum dolor sit amet consectetur adipiscing elit.",
                         tags = listOf(NewsTags.WELL_BEING, NewsTags.NUTRITION),
                         imageResource = R.drawable.img_nutritional_news_3,

@@ -14,7 +14,7 @@ fun BackButton(
     DefaultIconButton(
         modifier = modifier,
         iconResource = R.drawable.ic_arrow_left,
-        contentDescription = R.string.back_button,
+        contentDescription = R.string.back,
         onClick = onClick
     )
 }

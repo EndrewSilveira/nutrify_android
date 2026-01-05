@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,76 +49,85 @@ fun ProfileAppbar(
 ) {
     var hasUnreadNotification by remember { mutableStateOf(hasUnreadNotification) }
 
-    Row(
+    Box(
         modifier = modifier
+            .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface)
-            .padding(horizontal = NutrifyTheme.sizing.medium, vertical = NutrifyTheme.sizing.xLarge)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            modifier = Modifier
-                .size(NutrifyTheme.sizing.profileSizeSmall)
-                .clip(CircleShape)
-                .clickable(onClick = { onProfileClick }),
-            painter = painterResource(id = profilePicture),
-            contentDescription = "Profile Picture",
-            contentScale = ContentScale.Crop
-        )
-        Column(
+        Row(
             modifier = modifier
-                .weight(1f)
-                .padding(NutrifyTheme.sizing.small),
-            verticalArrangement = Arrangement.Center
+                .padding(
+                    horizontal = NutrifyTheme.sizing.small,
+                    vertical = NutrifyTheme.sizing.large
+                ),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = stringResource(id = R.string.hello_title, userName),
-                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.tertiary),
-            )
-            Text(
-                text = stringResource(id = R.string.welcome_back),
-                style = MaterialTheme.typography.titleSmall.copy(color = MaterialTheme.colorScheme.tertiaryFixed),
-            )
-        }
-
-        IconButton(
-            onClick = {
-                hasUnreadNotification = false
-                onNotificationClick()
-            }
-        ) {
-            val surfaceColor = MaterialTheme.colorScheme.surface
-            Icon(
+            Image(
                 modifier = Modifier
-                    .size(NutrifyTheme.sizing.iconSize)
-                    .drawWithContent {
-                        drawContent()
-
-                        if (hasUnreadNotification) {
-                            val circleRadius = size.minDimension / NOTIFICATION_BADGE_OUTER_CIRCLE_RATIO
-
-                            val circleOffset = Offset(
-                                x = size.width * NOTIFICATION_BADGE_OFFSET_X_RATIO,
-                                y = size.height * NOTIFICATION_BADGE_OFFSET_Y_RATIO
-                            )
-
-                            drawCircle(
-                                color = surfaceColor,
-                                radius = circleRadius,
-                                center = circleOffset
-                            )
-
-                            drawCircle(
-                                color = Secondary,
-                                radius = circleRadius / NOTIFICATION_BADGE_INNER_CIRCLE_RATIO,
-                                center = circleOffset
-                            )
-                        }
-                    },
-                painter = painterResource(id = R.drawable.ic_bell),
-                contentDescription = stringResource(id = R.string.notification_button)
+                    .size(NutrifyTheme.sizing.profileSizeSmall)
+                    .clip(CircleShape)
+                    .clickable(onClick = { onProfileClick }),
+                painter = painterResource(id = profilePicture),
+                contentDescription = "Profile Picture",
+                contentScale = ContentScale.Crop
             )
+            Column(
+                modifier = modifier
+                    .weight(1f)
+                    .padding(NutrifyTheme.sizing.small),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = stringResource(id = R.string.hello_title, userName),
+                    style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.tertiary),
+                )
+                Text(
+                    text = stringResource(id = R.string.welcome_back),
+                    style = MaterialTheme.typography.titleSmall.copy(color = MaterialTheme.colorScheme.tertiaryFixed),
+                )
+            }
+
+            IconButton(
+                onClick = {
+                    hasUnreadNotification = false
+                    onNotificationClick()
+                }
+            ) {
+                val surfaceColor = MaterialTheme.colorScheme.surface
+                Icon(
+                    modifier = Modifier
+                        .size(NutrifyTheme.sizing.large)
+                        .drawWithContent {
+                            drawContent()
+
+                            if (hasUnreadNotification) {
+                                val circleRadius =
+                                    size.minDimension / NOTIFICATION_BADGE_OUTER_CIRCLE_RATIO
+
+                                val circleOffset = Offset(
+                                    x = size.width * NOTIFICATION_BADGE_OFFSET_X_RATIO,
+                                    y = size.height * NOTIFICATION_BADGE_OFFSET_Y_RATIO
+                                )
+
+                                drawCircle(
+                                    color = surfaceColor,
+                                    radius = circleRadius,
+                                    center = circleOffset
+                                )
+
+                                drawCircle(
+                                    color = Secondary,
+                                    radius = circleRadius / NOTIFICATION_BADGE_INNER_CIRCLE_RATIO,
+                                    center = circleOffset
+                                )
+                            }
+                        },
+                    painter = painterResource(id = R.drawable.ic_bell),
+                    contentDescription = stringResource(id = R.string.notification),
+                    tint = MaterialTheme.colorScheme.tertiary
+                )
+            }
         }
     }
 }

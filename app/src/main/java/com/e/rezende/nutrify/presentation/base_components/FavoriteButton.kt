@@ -29,7 +29,7 @@ fun FavoriteButton(
         modifier = modifier,
         iconResource = if (isSelected) R.drawable.ic_heart_filled else R.drawable.ic_heart,
         contentColor = color,
-        contentDescription = R.string.favorite_button,
+        contentDescription = R.string.favorite,
         animationDuration = 500,
         onClick = {
             isSelected = !isSelected

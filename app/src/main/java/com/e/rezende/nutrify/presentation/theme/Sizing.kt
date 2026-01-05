@@ -17,6 +17,7 @@ data class Sizing(
     val xLarge: Dp = 32.dp,
     val iconSize: Dp = 40.dp,
     val profileSizeSmall: Dp = 48.dp,
+    val defaultImageSize: Dp = 60.dp,
     val x2l: Dp = 64.dp,
     val x3l: Dp = 128.dp,
     val x4l: Dp = 136.dp,
